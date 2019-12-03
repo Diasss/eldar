@@ -20,6 +20,23 @@ namespace WebApplication3.Controllers
             Products pr = db.Products.Find(id);
             return pr;
         }
+        public void EditProducts(int id, Products pr)
+        {
+            if (id == pr.Id)
+            {
+                db.Entry(pr).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+        public void DeleteProduct(int id)
+        {
+            Products pr = db.Products.Find(id);
+            if (pr != null)
+            {
+                db.Products.Remove(pr);
+                db.SaveChanges();
+            }
+        }
         public ActionResult Index()
         {
             return View();
